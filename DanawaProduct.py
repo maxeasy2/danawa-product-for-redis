@@ -78,7 +78,7 @@ else:
         low_price_list = r.lrange(low_price_list_key, 0, 2)
         low_price_list.reverse()
         
-        result_low_price_str = b'> '.join(low_price_list).decode()
+        result_low_price_str = b' > '.join(low_price_list).decode()
         
         reqUrl = webhook_url + parse.quote('상품명 : ' + prd_nm + '\n최저가 : ' + result_low_price_str + '\nURL : ' + url)
         urlopen(reqUrl)
