@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  danawa:
+    image: maxeasy2/danawa-lowprice-webhook-bot-for-redis:latest
+    environment:
+      # Currently only Telegram is supported.
+      # ex) https://api.telegram.org/${botId}/sendMessage?chat_id=${chatId}&text=
+      WEBHOOK_URL: ${WEBHOOK_URL}
+      PRODUCT_CODES: ${PRODUCT_CODES}
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379" 
+      # Value to distinguish Redis Key ex)telegram
+      CHAT_NAME: ${CHAT_NAME}
+      # Value to distinguish Redis Key ex)bot00000000
+      CHAT_ID: ${CHAT_ID} 
+    networks:
+      - danawa-net
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - danawa-net
+networks:
+  danawa-net:
